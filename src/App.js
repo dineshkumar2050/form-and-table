@@ -32,7 +32,8 @@ function App() {
         let formInfo = {...formData}
         const { username,password } = formInfo;
         if(checkAdmin(username) && checkAdmin(password)) {
-          return setTableData([...tableData,{ username,password }])
+          setTableData([...tableData,{ username,password }])
+          return setFormData({...formData,username: '',password: ''})
         }
         setError('Please fill username & password');
     }
@@ -41,11 +42,11 @@ function App() {
             <div className='form'>
                 <div className='username'>
                     <label for='username'>Username</label>
-                    <input required type='text' id='username' placeholder={'Type username here'} name='username' onChange={handleChange} />
+                    <input value={formData.username} required type='text' id='username' placeholder={'Type username here'} name='username' onChange={handleChange} />
                 </div>
                 <div className='password'>
                     <label for='password'>Password</label>
-                    <input required type='password' id='password' placeholder={'Type password here'} name='password' onChange={handleChange} />
+                    <input value={formData.password} required type='password' id='password' placeholder={'Type password here'} name='password' onChange={handleChange} />
                 </div>
                 <div className='submit button'>
                     <button type='button' onClick={handleSubmit}>Submit</button>
